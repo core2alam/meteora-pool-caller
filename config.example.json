@@ -1,0 +1,27 @@
+{
+  "_comment": "Salin file ini menjadi config.json lalu isi telegram.token & telegram.chatId. Lihat README.md.",
+
+  "pollIntervalSeconds": 45,
+
+  "telegram": {
+    "token": "",
+    "chatId": ""
+  },
+
+  "trigger": {
+    "timeframe": "5m",
+    "minVolumeUsd": 500,
+    "maxTokenAgeMinutes": 180,
+
+    "newListing": true,
+    "dlmmOnly": true,
+    "minMarketCapUsd": 100000,
+    "minHoldersCount": 500,
+    "minTvlUsd": 100,
+
+    "tokenSymbol": "SOL",
+    "tokenAddress": "So11111111111111111111111111111111111111112",
+
+    "pageSize": 50
+  }
+}

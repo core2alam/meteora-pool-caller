@@ -1,0 +1,72 @@
+{
+  "_description": "Konfigurasi trigger bot Meteora - kriteria pool baru yang akan memicu notifikasi.",
+  "_source": "Diambil dari filter UI meteora.ag (localStorage: Mercurial2-pool-discovery-filter-state) pada 2026-07-15.",
+  "_note": "File ini adalah SPESIFIKASI trigger yang akan dipakai bot. Nilai kosong (\"\") berarti filter tidak dipakai.",
+
+  "trigger": {
+    "timeframe": "5m",
+
+    "token_filter": {
+      "symbol": "SOL",
+      "address": "So11111111111111111111111111111111111111112",
+      "keterangan": "Hanya pantau pool yang berpasangan dengan SOL."
+    },
+
+    "token_details": {
+      "new_listing": true,
+      "verified_only": false,
+      "min_market_cap_usd": 100000,
+      "max_market_cap_usd": null,
+      "min_holders": 500,
+      "max_holders": null
+    },
+
+    "pool_details": {
+      "dlmm": true,
+      "damm_v2": false,
+      "has_farm": false,
+      "min_tvl_usd": 100,
+      "max_tvl_usd": null,
+      "min_pool_age_hours": null,
+      "max_pool_age_hours": null,
+      "min_volume_usd": null,
+      "max_volume_usd": null,
+      "min_fees_usd": null,
+      "min_active_tvl_usd": null
+    }
+  },
+
+  "_raw_localStorage": {
+    "Mercurial2-pool-discovery-filter-state": {
+      "tokens": [],
+      "verified": false,
+      "jupShieldSafeguard": false,
+      "newListing": true,
+      "noHighSupplyConcentration": false,
+      "noHighSingleOwnership": false,
+      "dlmm": true,
+      "dammV2": false,
+      "hasFarm": false,
+      "concentratedLiquidity": false,
+      "dynamicFee": false,
+      "minMarketCap": "100000",
+      "maxMarketCap": "",
+      "minTokenAge": "",
+      "maxTokenAge": "",
+      "minHolders": "500",
+      "maxHolders": "",
+      "minPoolAge": "",
+      "maxPoolAge": "",
+      "minVolume": "",
+      "maxVolume": "",
+      "minPoolTVL": "100",
+      "maxPoolTVL": "",
+      "minFees": "",
+      "minActiveTvl": ""
+    },
+    "Mercurial2-pool-discovery-timeframe": "5m",
+    "@meteoraag/pool-discovery-tokens": [
+      { "address": "So11111111111111111111111111111111111111112", "symbol": "SOL" }
+    ]
+  }
+}

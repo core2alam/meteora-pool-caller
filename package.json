@@ -1,0 +1,17 @@
+{
+  "name": "meteora-new-pool-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bot notifikasi Telegram untuk pool DLMM baru di Meteora yang punya volume.",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "once": "node index.js --once",
+    "dry": "node index.js --once --dry",
+    "test-telegram": "node index.js --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
