@@ -1,6 +1,7 @@
 node_modules/
 config.json
 state.json
+data.json
 bot.lock
 *.log
 .claude/
