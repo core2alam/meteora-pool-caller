@@ -37,14 +37,31 @@ function ts() {
 }
 
 // Kunci satu-instance: cegah bot jalan dobel (mis. auto-start + manual) yang
-// bisa menyebabkan alert ganda. Lock dianggap "hidup" bila diperbarui < 2x
-// interval poll yang lalu.
+// bisa menyebabkan alert ganda.
+//
+// Penting: lock TIDAK boleh hanya berdasar umur file. Saat PM2 me-restart bot,
+// proses lama mati tapi bot.lock-nya masih segar — kalau hanya umur yang dicek,
+// proses baru langsung keluar, PM2 menyalakannya lagi, dan jadi lingkaran gagal.
+// Jadi yang menentukan adalah: apakah PID di dalam lock itu MASIH HIDUP.
 const LOCK = path.join(__dirname, "bot.lock");
+
+function pidHidup(pid) {
+  if (!pid || pid === process.pid) return false;
+  try {
+    process.kill(pid, 0); // sinyal 0 = cuma cek keberadaan, tidak membunuh
+    return true;
+  } catch (e) {
+    return e.code === "EPERM"; // ada tapi milik user lain
+  }
+}
+
 function acquireLock(pollMs) {
   try {
+    const isi = parseInt(fs.readFileSync(LOCK, "utf8").trim(), 10);
     const stat = fs.statSync(LOCK);
-    if (Date.now() - stat.mtimeMs < Math.max(pollMs * 2, 120000)) {
-      console.error(`[${ts()}] Instance lain sepertinya sedang berjalan (bot.lock masih baru). Keluar.`);
+    const segar = Date.now() - stat.mtimeMs < Math.max(pollMs * 2, 120000);
+    if (segar && pidHidup(isi)) {
+      console.error(`[${ts()}] Instance lain sedang berjalan (PID ${isi}). Keluar.`);
       process.exit(0);
     }
   } catch {}
